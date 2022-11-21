@@ -1,0 +1,232 @@
+@use "../utils/variables" as *;
+@use "../utils/mixins" as *;
+
+.dashboard {
+  width: 100%;
+  display: grid;
+  grid-auto-rows: max-content;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: 1.5rem;
+
+  @include breakpoint(small) {
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    grid-template-rows: 1fr 1fr;
+    max-height: 518px; /* check if better solution */
+    gap: 2rem;
+  }
+
+  @include breakpoint(medium) {
+    max-width: 70rem;
+  }
+}
+
+.menu {
+  background: $clr-card;
+  border-radius: $br-card;
+  overflow: hidden;
+  width: 100%;
+
+  @include breakpoint(small) {
+    display: flex;
+    flex-flow: column nowrap;
+    grid-row: 1/3;
+  }
+
+  &__user {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
+    justify-content: flex-start;
+    background: $clr-main-card;
+    padding: 25px;
+    width: 100%;
+    border-radius: 0 0 $br-card $br-card;
+
+    @include breakpoint(small) {
+      padding: 32px;
+      flex-flow: column nowrap;
+      align-items: start;
+      gap: 40px;
+      flex: 1 0 auto;
+      height: 68%;
+    }
+
+    img {
+      width: 64px;
+      border: 3px solid $clr-txt;
+      border-radius: 50%;
+
+      @include breakpoint(small) {
+        width: 78px;
+      }
+    }
+
+    &--txt {
+      display: flex;
+      flex-direction: column;
+
+      @include breakpoint(small) {
+        max-width: 60%;
+      }
+
+      p {
+        font-size: 14px;
+        color: $clr-txt-pale-blue;
+      }
+
+      h1 {
+        font-size: $fs-h1;
+        font-weight: $fw-light;
+      }
+    }
+  }
+
+  &__options {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 35px;
+
+    @include breakpoint(small) {
+      flex-flow: column nowrap;
+      gap: 2rem;
+      padding: 35px 0 35px 25px;
+    }
+
+    &--btn {
+      font-size: 18px;
+      line-height: 0.5;
+      color: $clr-txt-inactive-desaturated-blue;
+      transition: color 250ms;
+      cursor: pointer;
+    }
+
+    &--btn:is(:hover, .active) {
+      color: $clr-txt;
+    }
+  }
+}
+
+.activity {
+  display: grid;
+  grid-template-rows: 3rem 1fr;
+  grid-template-columns: 1fr;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  background: $clr-card;
+  border-radius: $br-card;
+  cursor: pointer;
+
+  @include breakpoint(small) {
+    grid-template-rows: 4rem 1fr;
+  }
+
+  .work {
+    background: $clr-work;
+  }
+
+  .play {
+    background: $clr-play;
+  }
+
+  .study {
+    background: $clr-study;
+  }
+
+  .exercise {
+    background: $clr-exercise;
+
+    img {
+      transform: translateY(5px);
+    }
+  }
+
+  .social {
+    background: $clr-social;
+  }
+
+  .self-care {
+    background: $clr-self-care;
+  }
+
+  &__bg {
+    display: grid;
+    grid-row: 1/3;
+    grid-column: 1/2;
+    place-items: start end;
+    z-index: $z-index-bottom;
+
+    img {
+      transform: translate(-1rem, -0.7rem);
+      position: relative;
+      z-index: $z-index-bottom;
+    }
+  }
+
+  &__infos {
+    position: relative;
+    background: $clr-card;
+    transition: background 250ms, transform 250ms;
+    grid-row: 2/3;
+    grid-column: 1/2;
+    z-index: $z-index-top;
+    border-radius: $br-card $br-card 0 0;
+    padding: 30px;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 0.5rem;
+    cursor: pointer;
+
+    @include breakpoint(medium) {
+      transform: translateY(-25px);
+    }
+
+    &:hover {
+      background: $clr-card-hover;
+    }
+
+    &--header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      h2 {
+        font-weight: $fw-med;
+        font-size: 18px;
+      }
+    }
+  }
+
+  &__time {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include breakpoint(medium) {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: start;
+    }
+
+    h3 {
+      font-size: 32px;
+      font-weight: $fw-light;
+
+      @include breakpoint(medium) {
+        font-size: 56px;
+        padding: 20px 0 10px 0;
+      }
+    }
+
+    &--previous {
+      display: flex;
+      justify-content: space-between;
+      font-size: 15px;
+      color: $clr-txt-pale-blue;
+    }
+  }
+}
